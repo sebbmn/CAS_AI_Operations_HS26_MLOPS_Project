@@ -1,0 +1,35 @@
+# Runs the three FTI pipelines sequentially: feature -> training -> inference.
+#   docker compose up --build
+services:
+  feature-pipeline:
+    build: .
+    image: mlops-fti:latest
+    env_file: .env
+    command: python src/feature_pipeline.py
+    volumes:
+      - artifacts:/app/artifacts
+
+  training-pipeline:
+    build: .
+    image: mlops-fti:latest
+    env_file: .env
+    command: python src/training_pipeline.py
+    depends_on:
+      feature-pipeline:
+        condition: service_completed_successfully
+    volumes:
+      - artifacts:/app/artifacts
+
+  inference-pipeline:
+    build: .
+    image: mlops-fti:latest
+    env_file: .env
+    command: python src/inference_pipeline.py
+    depends_on:
+      training-pipeline:
+        condition: service_completed_successfully
+    volumes:
+      - artifacts:/app/artifacts
+
+volumes:
+  artifacts:

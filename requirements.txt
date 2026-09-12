@@ -1,0 +1,17 @@
+# Hopsworks requires Python < 3.14 -> the Docker image pins Python 3.11
+hopsworks==5.0.7
+
+# The pieces of the `hopsworks[python]` extra that this project needs.
+# (`hops-deltalake` from that extra is left out on purpose: it ships as a source
+#  distribution only and needs a Rust toolchain. The feature group is therefore
+#  created with time_travel_format="NONE", which does not require it.)
+pyarrow>=17.0
+confluent-kafka<=2.11.1
+fastavro>=1.4.11,<=1.12.0
+httpx<=0.28.1
+tqdm
+
+pandas==2.3.3
+scikit-learn==1.9.1
+joblib==1.5.2
+requests==2.32.5
