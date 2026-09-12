@@ -3,6 +3,8 @@ import os
 
 HOPSWORKS_API_KEY = os.getenv("HOPSWORKS_API_KEY")
 HOPSWORKS_PROJECT = os.getenv("HOPSWORKS_PROJECT")
+if HOPSWORKS_PROJECT and HOPSWORKS_PROJECT.startswith("REPLACE_WITH"):
+    HOPSWORKS_PROJECT = None
 
 CITY = os.getenv("CITY", "zurich")
 LATITUDE = float(os.getenv("LATITUDE", "47.3769"))
@@ -35,4 +37,4 @@ REALTIME_FEATURES = [
 ]
 FEATURES = AGGREGATED_FEATURES + REALTIME_FEATURES
 
-LOCAL_MODEL_DIR = os.getenv("LOCAL_MODEL_DIR", "/app/artifacts")
+LOCAL_MODEL_DIR = os.getenv("LOCAL_MODEL_DIR", "artifacts")

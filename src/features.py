@@ -1,6 +1,4 @@
 """Feature engineering shared by the feature pipeline and the inference pipeline."""
-import pandas as pd
-
 from config import CITY, EVENT_TIME, LABEL, PRIMARY_KEY
 
 RAIN_THRESHOLD_MM = 0.1
@@ -29,7 +27,7 @@ def build_training_frame(frame):
     frame[LABEL] = (
         frame["precipitation"].shift(-1) > RAIN_THRESHOLD_MM
     ).astype("int32")
-    frame.loc[frame.index[-1], LABEL] = pd.NA
+    frame = frame.iloc[:-1]
 
     frame[PRIMARY_KEY] = CITY
     frame[EVENT_TIME] = frame["time"]

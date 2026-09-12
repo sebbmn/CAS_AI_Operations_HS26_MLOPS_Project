@@ -45,12 +45,13 @@ def main():
     )
     X_train, X_test, y_train, y_test = feature_view.get_train_test_split(td_version)
     X_train, X_test = X_train[FEATURES], X_test[FEATURES]
+    y_train, y_test = y_train[LABEL], y_test[LABEL]
     print(f"      training dataset v{td_version}: "
           f"{len(X_train)} train rows / {len(X_test)} test rows")
 
     print("[3/5] Training the model ...")
     model = RandomForestClassifier(n_estimators=50, random_state=42)
-    model.fit(X_train, y_train.values.ravel())
+    model.fit(X_train, y_train)
 
     predictions = model.predict(X_test)
     metrics = {

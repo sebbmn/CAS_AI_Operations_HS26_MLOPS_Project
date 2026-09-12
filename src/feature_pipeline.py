@@ -53,11 +53,6 @@ def main():
     print(f"[4/4] Inserting {len(frame)} rows ...")
     feature_group.insert(frame, wait=True)
 
-    # The online store keeps one row per primary key. Re-inserting the most
-    # recent row makes sure the online lookup in the inference pipeline returns
-    # the latest aggregated features instead of an arbitrary row of the batch.
-    feature_group.insert(frame.tail(1), wait=True)
-
     for name, description in FEATURE_DESCRIPTIONS.items():
         feature_group.update_feature_description(name, description)
 

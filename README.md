@@ -84,8 +84,7 @@ Open-Meteo current ────────────► [I] inference_pipelin
 2. Rolling-Window-Aggregationen und Label berechnen (`src/features.py`)
 3. Feature Group `weather_hourly` v1 anlegen/holen – Primary Key `city`, Event Time `event_time`,
    `online_enabled=True`
-4. Dataframe einfügen; anschliessend die neueste Zeile nochmals einzeln einfügen, damit im
-   Online Store garantiert der aktuellste Stand pro Key liegt
+4. Dataframe einfügen (`insert(..., wait=True)`)
 5. Feature-Beschreibungen setzen
 
 ### `src/training_pipeline.py`
@@ -128,7 +127,7 @@ cp .env.example .env
 | Variable | Bedeutung | Default |
 |---|---|---|
 | `HOPSWORKS_API_KEY` | API-Key (Pflicht) | – |
-| `HOPSWORKS_PROJECT` | Projektname in Hopsworks | – |
+| `HOPSWORKS_PROJECT` | Projektname in Hopsworks (leer = Default-Projekt des Accounts) | – |
 | `CITY` | Primary Key / Ortsbezeichnung | `zurich` |
 | `LATITUDE` / `LONGITUDE` | Koordinaten | Zürich |
 | `HISTORY_DAYS` | Tage Historie für das Backfill | `365` |

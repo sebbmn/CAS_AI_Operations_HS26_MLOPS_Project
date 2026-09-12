@@ -59,7 +59,7 @@ def main():
 
     print("[3/4] Downloading the model from the Hopsworks Model Registry ...")
     model_registry = project.get_model_registry()
-    registry_model = model_registry.get_model(MODEL_NAME)
+    registry_model = max(model_registry.get_models(MODEL_NAME), key=lambda m: m.version)
     model_dir = registry_model.download()
     model = joblib.load(os.path.join(model_dir, "model.pkl"))
     print(f"      {MODEL_NAME} v{registry_model.version} "
