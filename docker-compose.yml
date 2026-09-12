@@ -3,6 +3,7 @@
 services:
   feature-pipeline:
     build: .
+    platform: linux/amd64
     image: mlops-fti:latest
     env_file: .env
     command: python src/feature_pipeline.py
@@ -11,6 +12,7 @@ services:
 
   training-pipeline:
     build: .
+    platform: linux/amd64
     image: mlops-fti:latest
     env_file: .env
     command: python src/training_pipeline.py
@@ -22,6 +24,7 @@ services:
 
   inference-pipeline:
     build: .
+    platform: linux/amd64
     image: mlops-fti:latest
     env_file: .env
     command: python src/inference_pipeline.py

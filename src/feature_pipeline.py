@@ -47,7 +47,6 @@ def main():
         primary_key=[PRIMARY_KEY],
         event_time=EVENT_TIME,
         online_enabled=True,
-        time_travel_format="NONE",
     )
 
     print(f"[4/4] Inserting {len(frame)} rows ...")
